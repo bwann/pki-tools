@@ -10,6 +10,25 @@ A couple of local conventions:
 * I keep my tools and cert store in `/opt/pki/tls`, away from the
   system/package managed directories to avoid clobbering them with Chef
   or accidentally deleting them.
+
+```
+/opt/pki/
+/opt/pki/CA/
+  |- certs
+  |- crl
+  |- newcerts
+  |- private
+  |- intermediate/
+     |- certs
+     |- crl
+     |- newcerts
+     |- private
+/opt/pki/tls/
+  |- certs
+  |- csr
+  | private
+```
+
 * I use filenames for certificates/requests/keys in the form of
   "`<fqdn>-<YYYYMMDD>-{cert,csr,key}.pem`" and that's how these scripts
   expect to output them.
@@ -33,3 +52,16 @@ Tools
   If you're curious what this does, sample output from running
   `make-wannnet-csrkey.sh` can be found in the `make-wannnet-csrkey.output`
   file.
+
+* `sign-wannnet-csr.sh` - Signs a certificate request with your CA,
+  adding "server" extensions from `openssl.cnf`.
+
+  Signing example:
+```
+./sign-wannnet-csr.sh ../tls/csr/example-20180915-csr.pem
+```
+
+  Example output is found in `sign-wannnet-csr.output`.
+
+
+TODO: add scripts for requesting and signing user-level certs

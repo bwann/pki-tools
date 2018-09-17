@@ -1,0 +1,52 @@
+[root@basic01 CA]# ./sign-wannnet-csr.sh ../tls/csr/example-20180915-csr.pem
+Using configuration from /opt/pki/CA/openssl.cnf
+Enter pass phrase for /opt/pki/CA/private/wannnet-ca-current-key.pem:
+Check that the request matches the signature
+Signature ok
+Certificate Details:
+        Serial Number: 73 (0x49)
+        Validity
+            Not Before: Sep 17 19:37:00 2018 GMT
+            Not After : Sep  6 19:37:00 2020 GMT
+        Subject:
+            countryName               = US
+            stateOrProvinceName       = California
+            organizationName          = example.com
+            commonName                = example
+            emailAddress              = pki@example.com
+        X509v3 extensions:
+            X509v3 Basic Constraints:
+                CA:FALSE
+            Netscape Cert Type:
+                SSL Server
+            Netscape Comment:
+                OpenSSL Generated Certificate
+            X509v3 Subject Key Identifier:
+                ...
+            X509v3 Authority Key Identifier:
+                ...
+                DirName:/C=US/ST=California/L=Fremont/O=example.com/OU=example.com CA/CN=example.com Root CA/emailAddress=pki@example.com
+                ...
+
+            X509v3 Key Usage: critical
+                Digital Signature, Key Encipherment
+            X509v3 Extended Key Usage:
+                TLS Web Server Authentication
+            Authority Information Access:
+                ...
+
+            X509v3 CRL Distribution Points:
+
+                Full Name:
+                  URI:...
+
+Certificate is to be certified until Sep  6 19:37:00 2020 GMT (720 days)
+Sign the certificate? [y/n]:y
+
+
+1 out of 1 certificate requests certified, commit? [y/n]y
+Write out database with 1 new entries
+Data Base Updated
+
+
+[root@basic01 CA]#

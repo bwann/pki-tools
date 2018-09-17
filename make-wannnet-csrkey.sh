@@ -38,6 +38,7 @@ answer() {
 
 target=$1
 sanlist=""
+openssl_cnf='/opt/pki/CA/intermediate/openssl.cnf'
 keyout="/opt/pki/tls/private/${target?}-${ts?}-key.pem"
 csrout="/opt/pki/tls/csr/${target?}-${ts?}-csr.pem"
 
@@ -68,7 +69,8 @@ if [ -z "${sanlist?}" ]; then
   # We don't have any subjAltNames to deal with
   answer ${target?} | /usr/bin/openssl req -newkey rsa:2048 \
     -keyout "${keyout?}" -sha256 -nodes -days 365 \
-    -out ${csrout?}
+    -out ${csrout?} \
+    -config ${openssl_cnf?}
 else
   # This calls -config passing in our standard openssl.cnf, then appending our 
   # formatted list of subjectAltNames as a phony extension section
@@ -76,7 +78,7 @@ else
     -keyout "${keyout?}" -sha256 -nodes -days 365 \
     -out ${csrout?} \
     -reqexts SAN -extensions SAN \
-    -config <(cat /opt/pki/CA/intermediate/openssl.cnf <(printf "[SAN]\n${sanlist?}"))
+    -config <(cat ${openssl_cnf} <(printf "[SAN]\n${sanlist?}"))
 fi
 
 echo
