@@ -5,7 +5,8 @@ Some of my scripts for working with TLS certificates with OpenSSL
 
 Preface
 -------
-A couple of local conventions:
+A couple of local conventions. These are easy enough to change to fit
+your needs, just so you know what to look for and expect.
 
 * I keep my tools and cert store in `/opt/pki/tls`, away from the
   system/package managed directories to avoid clobbering them with Chef
@@ -13,20 +14,20 @@ A couple of local conventions:
 
 ```
 /opt/pki/
-/opt/pki/CA/
+/opt/pki/CA/         # Root CA files
   |- certs
   |- crl
   |- newcerts
   |- private
-  |- intermediate/
+  |- intermediate/   # Intermediate CA files
      |- certs
      |- crl
      |- newcerts
      |- private
-/opt/pki/tls/
+/opt/pki/tls/        # My cert/key/request store for distribution
   |- certs
   |- csr
-  | private
+  |- private
 ```
 
 * I use filenames for certificates/requests/keys in the form of
